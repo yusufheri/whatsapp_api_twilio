@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous" ></script>
+         {{ encore_entry_link_tags('css/app') }}
+        <title>Sign in & Sign up Form</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {{ encore_entry_script_tags('js/app') }}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
