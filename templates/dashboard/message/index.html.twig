@@ -21,8 +21,9 @@
                     </thead>
                     <tbody>
                     {% set i = 0 %}
-                    {% set piece = "#" %}
+                    
                         {% for favorite in favorites %}
+                        {% set piece = "#" %}
                         {% set i = i + 1 %}
                         {% if favorite.image is not null %}
                             {% set piece =vich_uploader_asset(favorite, 'imageFile')  %}

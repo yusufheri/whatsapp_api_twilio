@@ -52,7 +52,7 @@ class MessageController extends AbstractController
                                     if ($hasFile) {
                                         $status = $this->send_whatsapp_sms("",$number_phone,$whatsapp->getContent());
                                     } else {
-                                        $status = $this->send_whatsapp_sms_media("",$number_phone,$whatsapp->getContent());
+                                        $status = $this->send_whatsapp_sms_media("",$number_phone,$whatsapp->getContent(),$whatsapp->getImage());
                                     }
                                     
                                     $message = new Message();
@@ -106,7 +106,8 @@ class MessageController extends AbstractController
         if (strpos($to, "+") === false) { $to ="+".$to; }
         //$media = "http://enysms.herokuapp.com/uploads/medias/".$media;
         //$media = "http://www.adiac-congo.com/sites/default/files/dsc_0596_fileminimizer.jpg";
-        $media = "https://resize-parismatch.lanmedia.fr/rcrop/250,250/img/var/news/storage/images/paris-match/people-a-z/denis-sassou-nguesso/22703684-2-fre-FR/Denis-Sassou-Nguesso.jpg";
+        $media = "https://apiwhatsapp2.herokuapp.com/uploads/medias/".$media;
+        //$media = "https://resize-parismatch.lanmedia.fr/rcrop/250,250/img/var/news/storage/images/paris-match/people-a-z/denis-sassou-nguesso/22703684-2-fre-FR/Denis-Sassou-Nguesso.jpg";
         
         $data = array (
             'From' => 'whatsapp:+14155238886',
