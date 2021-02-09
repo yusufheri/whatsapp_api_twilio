@@ -5,3 +5,4 @@ vich_uploader:
         whatsapp_media:
                     uri_prefix:         '%app.path.medias%'
                     upload_destination: '%kernel.project_dir%/public%app.path.medias%'
+                    namer: Vich\UploaderBundle\Naming\UniqidNamer

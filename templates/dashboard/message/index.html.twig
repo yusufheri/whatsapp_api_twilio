@@ -1,0 +1,50 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md">
+            
+            <div class="row">
+                <div class="col-md"><h1>Dernières diffusions</h1></div>
+                <div class="col-md"><a class="btn btn-outline-primary float-right mt-2" href="{{ path('dashboard_message_bulk') }}"> <i class="fas fa-plus"></i> Nouvelle diffusion</a></div>
+            </div>
+            <table class="table table-striped table-inverse table-responsive">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th width="5%">N°</th>
+                        <th width="15%">Date d'envoi</th>
+                        <th width="65%">Message</th>
+                        <th width="15%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set i = 0 %}
+                    {% set piece = "#" %}
+                        {% for favorite in favorites %}
+                        {% set i = i + 1 %}
+                        {% if favorite.image is not null %}
+                            {% set piece =vich_uploader_asset(favorite, 'imageFile')  %}
+                        {% endif %}
+                        
+                            <tr>
+                                <td scope="row" class="text-center">{{ i }}</td>
+                                <td>{{ favorite.createdAt | date('d-m-Y H:i') }}</td>
+                                <td>
+                                    {{ favorite.content | raw }} 
+                                    {% if piece != "#" %}
+                                    <br><a href="{{piece}}">Pièce jointe</a>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-primary">{{ favorite.messageSuccess }}  <i class="fas fa-thumbs-up"></i> </a> 
+                                    <a href="#" class="btn btn-danger">{{ favorite.messageError }} <i class="fas fa-thumbs-down"></i></a> 
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

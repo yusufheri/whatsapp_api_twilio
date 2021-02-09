@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\PersonRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PersonRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=PersonRepository::class)
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *      fields={"phoneMain"},
+ *      message="Ce numéro de téléphone a été déjà enregistré"
+ * )
  */
 class Person
 {
@@ -69,9 +75,39 @@ class Person
      */
     private $messages;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $sid;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $date_created_sms;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $date_updated_sms;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $valid;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+    }
+
+    /**
+     * Permet de générer la date de création
+     * @ORM\PrePersist
+     */
+    public function prePersist(){
+        if (empty($this->createdAt)){
+            $this->createdAt = new \DateTime();
+        }
     }
 
     public function getId(): ?int
@@ -213,6 +249,54 @@ class Person
                 $message->setPerson(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSid(): ?string
+    {
+        return $this->sid;
+    }
+
+    public function setSid(?string $sid): self
+    {
+        $this->sid = $sid;
+
+        return $this;
+    }
+
+    public function getDateCreatedSms(): ?string
+    {
+        return $this->date_created_sms;
+    }
+
+    public function setDateCreatedSms(?string $date_created_sms): self
+    {
+        $this->date_created_sms = $date_created_sms;
+
+        return $this;
+    }
+
+    public function getDateUpdatedSms(): ?string
+    {
+        return $this->date_updated_sms;
+    }
+
+    public function setDateUpdatedSms(?string $date_updated_sms): self
+    {
+        $this->date_updated_sms = $date_updated_sms;
+
+        return $this;
+    }
+
+    public function getValid(): ?bool
+    {
+        return $this->valid;
+    }
+
+    public function setValid(?bool $valid): self
+    {
+        $this->valid = $valid;
 
         return $this;
     }

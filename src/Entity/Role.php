@@ -29,6 +29,11 @@ class Role
      */
     private $content;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="userRoles")
+     */
+    private $users;
+
     
 
     public function __construct()
@@ -61,6 +66,33 @@ class Role
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addUserRole($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeUserRole($this);
+        }
 
         return $this;
     }

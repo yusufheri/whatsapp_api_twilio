@@ -23,7 +23,10 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+    .addEntry('js/home', './assets/js/home.js')
     .addEntry('js/app', './assets/js/app.js')
+    
+    .addStyleEntry('css/home', './assets/css/home.css')
     .addStyleEntry('css/app', './assets/css/app.css')
     //.addEntry('page1', './assets/page1.js')
     //.addEntry('page2', './assets/page2.js')
@@ -56,7 +59,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()

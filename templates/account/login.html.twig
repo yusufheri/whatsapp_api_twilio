@@ -1,0 +1,36 @@
+<form action="{{ path('account_login') }}" class="sign-in-form">
+            <h2 class="title">Connectez - vous !</h2>
+            
+            {% set _mail = "" %}
+            {% if hasErrors is defined %}
+              {% if hasErrors %}
+                  <div class="alert alert-danger">
+                      Une erreur est survenue, le nom d'utilisteur ou alors le mot de passe est invalide
+                  </div>
+              {% endif %} 
+              {% set _mail = username %}           
+            {% endif %}
+
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Tapez votre mail" value="{{_mail}}"  name="_username"/>
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Tapez votre mot de passe" name="_password"/>
+            </div>
+            <button type="submit"  class="btn solid" ><i class="fa fa-check" aria-hidden="true"></i> Se connecter</button>
+           
+            <p class="social-text">Suivez-nous</p>
+            <div class="social-media">
+              <a href="http://fb.com/enyworksarl" class="social-icon" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com/enyworksarl" class="social-icon" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://www.linkedin.com/company/enywork" class="social-icon" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </form>

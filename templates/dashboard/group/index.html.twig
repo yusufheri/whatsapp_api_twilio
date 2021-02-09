@@ -1,0 +1,83 @@
+{% extends "dashboard/base.html.twig" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    {% include "dashboard/partials/header.html.twig" with { title:'Mes différents groupes', subTitle: '' } %}
+    <div class="row">
+        <div class="col-md">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Groupes créés
+                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#exampleModalCenter">
+                        <i class="fas fa-plus"></i> Nouveau
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th width="5%">N°</th>
+                                    <th width="30%">Libellé</th>
+                                    <th width="15%">Membres</th>
+                                    <th width="50%">Description</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th width="5%">N°</th>
+                                    <th width="30%">Libellé</th>
+                                    <th width="15%">Membres</th>
+                                    <th width="50%">Description</th>
+                                </tr>                                                                    
+                            </tfoot>
+                            <tbody>
+                            {% set i = 0 %}
+                                {% if groupes|length > 0 %}
+                                    {% for group in groupes %}
+                                        {% set i = i + 1  %}
+                                        <tr>
+                                            <td>{{i}}</td>
+                                            <td>{{group.title}}</td>
+                                            <td class="text-center">{{group.people | length}}</td>
+                                            <td>{{group.description}}</td>
+                                            <!--
+                                            <td>
+                                                <button class="btn btn-outline-success" data-id="{{group.id}}"><i class="fa fa-eye"></i></button>
+                                                <button class="btn btn-outline-warning" data-id="{{group.id}}"><i class="fa fa-edit"></i></button>
+                                                <button class="btn btn-outline-danger"  data-id="{{group.id}}"><i class="fa fa-trash"></i></button>
+                                            </td>-->
+                                        </tr>
+                                    {% endfor %}                                
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Nouveau groupe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        {{ form_start(form) }}
+      <div class="modal-body">       
+        {{ form_widget(form) }}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle    "></i> Enregistrer</button>
+      </div>      
+        {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

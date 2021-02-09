@@ -1,0 +1,62 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    {% include "dashboard/partials/header.html.twig" with { title:'Mes contacts', subTitle: 'Liste des numéros de téléphones déjà enregistrés' } %}
+    <div class="row">
+        <div class="col-md">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    <a href="{{ path('dashboard_member_create') }}" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Nouveau</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th width="5%">N°</th>
+                                    <th width="20%">Groupe</th>
+                                    <th width="24%">Noms</th>
+                                    <th width="35%">Contacts</th>
+                                    <th width="16%"></th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th width="5%">N°</th>
+                                    <th width="20%">Groupe</th>
+                                    <th width="24%">Noms</th>
+                                    <th width="35%">Contacts</th>
+                                    <th width="16%"></th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            {% set i = 0 %}
+                                {% if people|length > 0 %}
+                                    {% for person in people %}
+                                        {% set i = i + 1  %}
+                                        <tr>
+                                            <td>{{i}}</td>
+                                            <td>{{person.groupe.title}}</td>
+                                            <td>{{person.name ~' '~ person.lastname |capitalize}}</td>
+                                            <td><b>{{person.phoneMain}}</b>&nbsp; <b>{{person.phoneSecond}}</b></td>
+                                            <td>
+                                            <!--
+                                                <button class="btn btn-outline-success" data-id="{{person.id}}"><i class="fa fa-eye"></i></button>
+                                                <button class="btn btn-outline-warning" data-id="{{person.id}}"><i class="fa fa-edit"></i></button>
+                                                <button class="btn btn-outline-danger"  data-id="{{person.id}}"><i class="fa fa-trash"></i></button>
+                                            -->
+                                            </td>
+                                        </tr>
+                                    {% endfor %}                                
+                                {% endif %}                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

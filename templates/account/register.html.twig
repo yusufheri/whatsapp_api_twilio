@@ -1,0 +1,39 @@
+<form action="{{ path('account_register') }}" class="sign-up-form">
+            <h2 class="title">Créez votre compte</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Votre nom" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Votre adresse mail"  name="_email"/>
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Votre mot de passe" name="_password" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Confirmez votre mot de passe" name="_confirm" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-comment"></i>
+              <input type="email" placeholder="Petite introduction" name="_content"/>
+            </div>
+            <button type="submit"  class="btn solid" >
+                <i class="fa fa-check" aria-hidden="true"></i> S'inscrire
+            </button>
+           
+            <p class="social-text">Suivez-nous</p>
+            <div class="social-media">
+              <a href="http://fb.com/enyworksarl" class="social-icon" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com/enyworksarl" class="social-icon" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://www.linkedin.com/company/enywork" class="social-icon" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </form>

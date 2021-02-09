@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    {% include "dashboard/partials/header.html.twig" with { title:'Nouveau membre', subTitle: 'Enregistrement d un nouveau membre ou contact' } %}
+    
+    <div class="row">
+        <div class="col-md">
+            {{form_start(form)}}
+            {{form_row(form.groupe)}}
+            <div class="row">
+                <div class="col-md-6">{{form_row(form.name)}}</div>
+                <div class="col-md-6">{{form_row(form.lastname)}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{form_row(form.phoneMain)}}</div>
+                <div class="col-md-6">{{form_row(form.phoneSecond)}}</div>
+            </div>
+            {{ form_widget(form) }}
+            <div class="alert alert-primary">
+                <h1>Super !!</h1>
+                <button type="submit" class="btn btn-outline-success">
+                    <i class="fas fa-check-double    "></i>Enregistrer
+                </button>
+            </div>
+            {{form_end(form)}}
+        </div>
+    </div>
+{% endblock %}

@@ -2,14 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\GroupRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\GroupRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=GroupRepository::class)
  * @ORM\Table(name="`group`")
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *      fields={"title"},
+ *      message="Un autre groupe s'est déjà inscris avec ce nom"
+ * )
  */
 class Group
 {
@@ -54,6 +60,16 @@ class Group
     {
         $this->people = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+    }
+
+    /**
+     * Permet de générer la date de création
+     * @ORM\PrePersist
+     */
+    public function prePersist(){
+        if (empty($this->createdAt)){
+            $this->createdAt = new \DateTime();
+        }
     }
 
     public function getId(): ?int
