@@ -67,14 +67,19 @@ class User implements UserInterface
      */
     private $userRoles;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $fullname;
-
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
+    }
+
+    /**
+     * Permet de générer la date de création
+     * @ORM\PrePersist
+     */
+    public function prePersist(){
+        if (empty($this->createdAt)){
+            $this->createdAt = new \DateTime();
+        }
     }
 
 
@@ -203,19 +208,6 @@ class User implements UserInterface
     public function getSalt(){}
 
     public function eraseCredentials(){}
-
-    public function getFullname(): ?string
-    {
-        return $this->fullname;
-    }
-
-    public function setFullname(string $fullname): self
-    {
-        $this->fullname = $fullname;
-
-        return $this;
-    }
-
 
     /**
      * Get the value of passwordConfirm
